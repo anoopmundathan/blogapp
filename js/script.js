@@ -15,7 +15,9 @@ var BlogView = Backbone.View.extend({
 	//model: new Blog(),
 	events: {
 		'click .edit-blog': 'editBlog',
-		'click .delete-blog': 'deleteBlog'
+		'click .delete-blog': 'deleteBlog',
+		'click .update-blog': 'updateBlog',
+		'click .cancel-blog': 'cancelBlog'
 	},
 	tagName: 'tr',
 	initialize: function() {
@@ -26,13 +28,37 @@ var BlogView = Backbone.View.extend({
 		return this;
 	},
 	editBlog: function() {
+
+		// Hide Edit and Delete button
 		$('.edit-blog').hide();
 		$('.delete-blog').hide();
-		$('.save-blog').show();
+		
+		// Show Save and Cance button
+		$('.update-blog').show();
 		$('.cancel-blog').show();
+
+		// Store the values
+		var author = this.$('.author').html();
+		var title = this.$('.title').html();
+		var url = this.$('.url').html();
+
+		// Change html into an Input tag
+		this.$('.author').html('<input type="text" class="author-update" value=' + author +'></input>');
+		this.$('.title').html('<input type="text" class="title-update" value=' + title +'></input>');
+		this.$('.url').html('<input type="text" class="url-update" value=' + url +'></input>');
 	},
 	deleteBlog: function() {
 		
+	},
+	updateBlog: function() {
+	
+		// Update the model
+		this.model.set('author',$('.author-update').val());
+		this.model.set('title',$('.title-update').val());
+		this.model.set('url',$('.url-update').val());
+	},
+	cancelBlog: function() {
+
 	}
 });
 
@@ -43,6 +69,12 @@ var BlogsView = Backbone.View.extend({
 	initialize: function() {
 		//this.model.on('add', this.render, this);
 		blogs.on('add',this.render,this);
+		blogs.on('change',function() {
+			var self = this;
+			setTimeout(function(){
+				self.render();
+			}, 30)
+		},this);
 	},
 	render: function() {
 		var self = this;
@@ -54,6 +86,7 @@ var BlogsView = Backbone.View.extend({
 			self.$el.append(new BlogView({model:b}).render().$el);
 
 		});*/
+		console.log('render');
 		return this;
 	}
 });
