@@ -13,6 +13,10 @@ var blogs = new Blogs();
 // Blog Views
 var BlogView = Backbone.View.extend({
 	//model: new Blog(),
+	events: {
+		'click .edit-blog': 'editBlog',
+		'click .delete-blog': 'deleteBlog'
+	},
 	tagName: 'tr',
 	initialize: function() {
 		this.template = _.template($('.blogs-list-template').html());
@@ -20,6 +24,15 @@ var BlogView = Backbone.View.extend({
 	render: function() {
 		this.$el.html(this.template(this.model.toJSON()));
 		return this;
+	},
+	editBlog: function() {
+		$('.edit-blog').hide();
+		$('.delete-blog').hide();
+		$('.save-blog').show();
+		$('.cancel-blog').show();
+	},
+	deleteBlog: function() {
+		
 	}
 });
 
