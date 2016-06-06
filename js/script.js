@@ -34,8 +34,8 @@ var BlogView = Backbone.View.extend({
 		$('.delete-blog').hide();
 		
 		// Show Save and Cance button
-		$('.update-blog').show();
-		$('.cancel-blog').show();
+		this.$('.update-blog').show();
+		this.$('.cancel-blog').show();
 
 		// Store the values
 		var author = this.$('.author').html();
@@ -48,7 +48,7 @@ var BlogView = Backbone.View.extend({
 		this.$('.url').html('<input type="text" class="url-update" value=' + url +'></input>');
 	},
 	deleteBlog: function() {
-		
+		this.model.destroy();
 	},
 	updateBlog: function() {
 	
@@ -58,7 +58,8 @@ var BlogView = Backbone.View.extend({
 		this.model.set('url',$('.url-update').val());
 	},
 	cancelBlog: function() {
-
+		//blogsView.render();
+		this.render();
 	}
 });
 
@@ -75,6 +76,7 @@ var BlogsView = Backbone.View.extend({
 				self.render();
 			}, 30)
 		},this);
+		blogs.on('destroy', this.render, this);
 	},
 	render: function() {
 		var self = this;
@@ -91,7 +93,7 @@ var BlogsView = Backbone.View.extend({
 	}
 });
 
-new BlogsView();
+var blogsView = new BlogsView();
 
 $(document).ready(function() {
 	$('.add-blog').on('click', function() {
