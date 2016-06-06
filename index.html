@@ -25,20 +25,21 @@
 					<td><button class="btn btn-primary add-blog">Add</button></td>
 				</tr>
 				<tbody class="blogs-list">
+					
 				</tbody>
 			</thead>
 		</table>
 	</div>
 	
+	
 	<script type="text/template" class="blogs-list-template">
-		<td><%= author%></td>
-		<td><%= title%></td>
-		<td><%= url%></td>
-		<td><button class="btn btn-warning edit-blog">Edit</button>
-			<button class="btn btn-danger delete-blog">Delete</button>
-		</td>
-	</script>
-
+						<td><%= author%></td>
+						<td><%= title%></td>
+						<td><%= url%></td>
+						<td><button class="btn btn-warning edit-blog">Edit</button>
+						<button class="btn btn-danger delete-blog">Delete</button>
+						</td>
+					</script>
 	<script src="bower_components/jquery/dist/jquery.js"></script>
 	<script src="bower_components/underscore/underscore.js"></script>
 	<script src="bower_components/backbone/backbone.js"></script>
