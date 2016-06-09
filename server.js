@@ -17,17 +17,28 @@ mongoose.model('Blog',BlogSchema);
 
 var Blog = mongoose.model('Blog');
 
-var blog = new Blog({
+/*var blog = new Blog({
 	author: 'Anoop',
 	title: 'Mundathan',
 	url: 'www.abc.com'
 });
 
 // Save the model
-blog.save();
+blog.save();*/
 
 var app = express();
 app.use(express.static(__dirname + '/'));
+
+// ROUTES
+
+app.get('/api/blogs', function(req, res) {
+	Blog.find(function(err, docs){
+			docs.forEach(function(item) {
+				console.log("Received a GET request:" + item._id);
+			})
+		res.send(docs);
+	});
+});
 
 var port = 3000;
 app.listen(port);

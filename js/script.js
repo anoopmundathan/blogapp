@@ -5,7 +5,9 @@
 var Blog = Backbone.Model.extend({});
 
 // Collection
-var Blogs = Backbone.Collection.extend();
+var Blogs = Backbone.Collection.extend({
+	url: 'http://localhost:3000/api/blogs'
+});
 
 // Instantiate Collection
 var blogs = new Blogs();
@@ -77,6 +79,19 @@ var BlogsView = Backbone.View.extend({
 			}, 30)
 		},this);
 		blogs.on('destroy', this.render, this);
+
+		// GET data from Server
+		blogs.fetch({
+			success: function(response) {
+				_.each(response.toJSON(), function(item) {
+					console.log('Successfully Got' + item._id);
+				})
+			},
+			error: function() {
+				console.log('Failed');
+			}
+		});
+
 	},
 	render: function() {
 		var self = this;
