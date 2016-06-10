@@ -1,4 +1,5 @@
 var express = require('express');
+var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
 // Connect to mongodb
@@ -29,6 +30,9 @@ blog.save();*/
 var app = express();
 app.use(express.static(__dirname + '/'));
 
+// Use Body Parser
+app.use(bodyParser.json());
+
 // ROUTES
 
 app.get('/api/blogs', function(req, res) {
@@ -37,6 +41,17 @@ app.get('/api/blogs', function(req, res) {
 				console.log("Received a GET request:" + item._id);
 			})
 		res.send(docs);
+	});
+});
+
+app.post('/api/blogs', function(req, res) {
+	console.log('Received a POST request');
+	for (var key in req.body) {
+		console.log('Key'+req.body[k])
+	}
+	var blog = new Blog(req.body);
+	blog.save(function() {
+		res.send(doc);
 	});
 });
 
