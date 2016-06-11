@@ -79,6 +79,7 @@ var BlogsView = Backbone.View.extend({
 			}, 30)
 		},this);
 		blogs.on('destroy', this.render, this);
+		console.log('hi');
 
 		// GET data from Server
 		blogs.fetch({
@@ -124,10 +125,10 @@ $(document).ready(function() {
 		blogs.add(blog);
 		blog.save({
 			success: function(response) {
-				console.log('Successfully saved' + response.toJSON());
+				console.log('Successfully saved' + response.toJSON()._id)
 			},
 			error: function() {
-				console.log('Something wrong in save');
+				console.log('Failed to save, try later');
 			}
 		});
 	})
