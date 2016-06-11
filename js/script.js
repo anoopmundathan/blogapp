@@ -122,6 +122,14 @@ $(document).ready(function() {
 		$('.url-input').val('');
 		
 		blogs.add(blog);
+		blog.save({
+			success: function(response) {
+				console.log('Successfully saved' + response.toJSON());
+			},
+			error: function() {
+				console.log('Something wrong in save');
+			}
+		});
 	})
 		
 })
