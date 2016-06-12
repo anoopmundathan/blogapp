@@ -47,7 +47,7 @@ app.get('/api/blogs', function(req, res) {
 app.post('/api/blogs', function(req, res) {
 	console.log('Received a POST request');
 	for (var key in req.body) {
-		console.log('Key'+req.body[k])
+		console.log('Key'+req.body[key])
 	}
 	var blog = new Blog(req.body);
 	blog.save(function() {

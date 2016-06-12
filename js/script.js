@@ -23,9 +23,11 @@ var BlogView = Backbone.View.extend({
 	},
 	tagName: 'tr',
 	initialize: function() {
+		console.log('initialize');
 		this.template = _.template($('.blogs-list-template').html());
 	},
 	render: function() {
+		console.log('render table');
 		this.$el.html(this.template(this.model.toJSON()));
 		return this;
 	},
@@ -95,6 +97,7 @@ var BlogsView = Backbone.View.extend({
 
 	},
 	render: function() {
+
 		var self = this;
 		this.$el.html('');
 		_.each(blogs.toArray(), function(b){
@@ -104,7 +107,6 @@ var BlogsView = Backbone.View.extend({
 			self.$el.append(new BlogView({model:b}).render().$el);
 
 		});*/
-		console.log('render');
 		return this;
 	}
 });
@@ -113,6 +115,7 @@ var blogsView = new BlogsView();
 
 $(document).ready(function() {
 	$('.add-blog').on('click', function() {
+		console.log('Clicked Add Button');
 		var blog = new Blog({
 			author: $('.author-input').val(),
 			title: $('.title-input').val(),
